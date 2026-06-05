@@ -1,0 +1,7 @@
+export enum AuthFlows {
+  LOGIN,
+  SIGNUP,
+  FORGOT_PASSWORD,
+  RESET_PASSWORD,
+  RESET_PASSWORD_SENT,
+}

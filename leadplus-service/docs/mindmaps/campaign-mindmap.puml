@@ -1,0 +1,23 @@
+@startmindmap
++ Campaign Generator & Orchestrator
++- Contact Eligibility Logic
+++-_ Not Unsubscribed
+++-_ No Bounces
+++-_ No Active Campaigns
+++-_ Last Email Throttle (7 days)
+++-_ Sequence Cooldown (90 days)
++- Configurable Parameters
+++-_ Max Emails per Day Per Mailbox
+++-_ Max Emails per Week Per Recipient
+++-_ Preferred Send Days/Times
+++-_ Delay Between Steps
+++-_ Last Email Throttle Duration
+++-_ Sequence Cooldown Duration
+++ Campaign Generator
++++_ LLM Assistant
+++ Campaign Orchestrator
++++_ Email Automation Layer
+++++_ Contact Eligibility Logic
+++++_ Campaign Sequence Template Generator
+++++_ Campaign Execution Engine
+@endmindmap

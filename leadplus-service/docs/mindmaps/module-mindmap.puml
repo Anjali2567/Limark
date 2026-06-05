@@ -1,0 +1,28 @@
+@startmindmap
++ LeadPlus
+++ Tenant
++++ Module
+++++ Customer Module <<Purple>>
++++++_ Lead Discovery Screen
++++++_ Submit RFQ
++++++_ Publish RFP
+++++ Vender Module <<Green>>
++++++_ RFQ Listing
++++++_ RFP Listing / Searching
+++++ Lead Generation Module <<Orange>>
++++++_ Search Leads
++++++_ Connect Mailbox
++++++_ Campaign Management
+++++ Administration Module <<Yellow>>
++++++_ User Management
++++++_ Role Assignment
++++++_ Data Pack Assignment
++++++_ Industry Management
+++ User
++++ Role
+++++ Customer <<Purple>>
+++++ Vender <<Green>>
+++++ Lead Agent <<Orange>>
+++++ Administrator <<Yellow>>
+++ Workspace
+@endmindmap

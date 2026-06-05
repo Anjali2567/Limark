@@ -1,0 +1,58 @@
+{
+  "options": {
+    "locale": "en-US",
+    "timeout": 1000000,
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "timezoneId": "America/New_York"
+  },
+  "actions": [
+    {
+      "type": "loadPage",
+      "timeout": 15000,
+      "waitUntil": "domcontentloaded"
+    },
+    {
+      "type": "scrollToEnd",
+      "maxScrolls": 5,
+      "scrollDelay": 500
+    },
+    {
+      "type": "llmExtract",
+      "output_key": "job_details",
+      "forceVisible": true,
+      "schema": {
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "technologies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Programming languages, frameworks, libraries (e.g. Python, C++, ROS, AWS)"
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specific software tools (e.g. Docker, Git, Jira, MATLAB)"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Cloud or third-party services (e.g. AWS S3, Azure, GitHub Actions)"
+        }
+      },
+      "instructions": "Extract the full job requirements, technical technologies/languages/frameworks, specific software tools, and cloud/third-party services mentioned for this specific job posting."
+    }
+  ]
+}

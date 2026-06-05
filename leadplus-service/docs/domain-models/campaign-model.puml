@@ -1,0 +1,271 @@
+@startuml
+<style>
+class {
+  Padding 5
+  RoundCorner 10
+  HorizontalAlignment center
+  LineThickness 0.5
+  FontSize 12
+  LineStyle 2
+}
+
+arrow {
+  LineStyle 2
+  LineThickness 0.75
+}
+</style>
+
+skinparam {
+  BackgroundColor Transparent
+  ArrowFontColor DimGray
+  CloudBorderColor DimGray
+  class {
+    BackgroundColor<<Aggregate Root>> #D5A6BD
+    BackgroundColor<<Enum>> #D9D9D9
+    BackgroundColor<<Value Object>> #B6D7A8
+  }
+}
+
+hide circle
+hide methods
+
+class AttachmentLibrary <<Aggregate Root>> {
+  id: UUID
+  workspaceId: UUID
+  tenantId: UUID
+  filename: String
+  fileUrl: String
+  fileType: String
+  sizeBytes: Integer
+  uploadedAt: Timestamp
+  uploadedBy: UUID
+}
+
+class Campaign <<Aggregate Root>> {
+  id: UUID
+  name: String
+  tenantId: UUID
+  workspaceId: UUID
+  templateId: UUID
+  sendingMailboxId: UUID
+  approvedBy: UUID
+  targetingCriteria: TargetingCriteria
+  scheduledStart: LocalDate
+  status: CampaignStatus
+  ccRecipients: Recipient[]
+  bccRecipients: Recipient[]
+  sendingWindow: SendingWindow
+  createdBy: String
+  launchedAt: LocalDateTime
+  createdAt: LocalDateTime
+  updatedBy: String
+  updatedAt: LocalDateTime
+}
+
+class SendingWindow <<Value Object>> {
+  windowStart: LocalTime
+  windowEnd: LocalTime
+  sendingDays: DayOfWeek[]
+}
+
+class Recipient <<Value Object>> {
+  name: string
+  email: string
+}
+
+class CampaignContact <<Aggregate Root>> {
+  id: UUID
+  tenantId: UUID
+  campaignId: UUID
+  contactId: UUID
+  participating: boolean
+  currentStep: Integer
+  lastSentAt: Timestamp
+  nextSendAt: Timestamp
+  replyReceived: boolean
+  status: CampaignContactStatus
+  emailData: EmailData[]
+  updatedAt: Timestamp
+}
+
+class CampaignEmail <<Aggregate Root>> {
+  id: UUID
+  tenantId: UUID
+  campaignId: UUID
+  stepNumber: Integer
+  subject: String
+  bodyTemplate: String
+  delayDays: Integer
+  attachmentIds: UUID[]
+  status: CampaignEmailStatus
+  updatedBy: String
+  updatedAt: Timestamp
+}
+
+class CampaignChatMemory <<Aggregate Root>> {
+  id: UUID
+  campaignId: UUID
+  name: String
+  industry: String
+  tenantId: UUID
+  workspaceId: UUID
+  targetingCriteria: TargetingCriteria
+  createdBy: String
+  createdAt: LocalDateTime
+  updatedBy: String
+  updatedAt: LocalDateTime
+}
+
+class ContactOutreachStatus <<Aggregate Root>> {
+  id: UUID
+  contactId: UUID
+  tenantId: UUID
+  currentCampaignId: UUID
+  lastEmailAt: LocalDateTime
+  status: GlobalOutreachStatus
+  sequenceCompletedAt: LocalDateTime
+  updatedAt: LocalDateTime
+}
+
+class Message <<Aggregate Root>> {
+  id: String
+  conversationId: String
+  userId: String
+  request: String
+  response: String
+  campaignId: String
+  targetingCriteria: TargetingCriteria
+  createdAt: LocalDateTime
+}
+
+class EmailSequenceTemplate <<Aggregate Root>> {
+  id: UUID
+  tenantId: UUID
+  name: String
+  description: String
+  steps: EmailSequenceTemplateStep[]
+  createdBy: String
+  createdAt: LocalDateTime
+  updatedAt: LocalDateTime
+}
+
+class EmailSequenceTemplateStep <<Value Object>> {
+  stepNumber: Integer
+  subject: String
+  bodyTemplate: String
+  delayDays: Integer
+}
+
+class TargetingCriteria <<Value Object>> {
+  conversationId: String
+  searchQuery: String
+  employeeRanges: EmployeeRange[]
+  companyLocationFilter: LocationFilter
+  companyExcludeLocationFilter: LocationFilter
+  companyIds: String[]
+  contactLocationFilter: LocationFilter
+  jobTitles: String[]
+  contactIds: String[]
+}
+
+class LocationFilter <<Value Object>> {
+  cities: String[]
+  states: String[]
+  countries: String[]
+  regions: String[]
+}
+
+class EmailData <<Value Object>> {
+  stepNumber: number
+  emailPlatform: MailBoxType
+  azureMessageId: string
+  azureConversationId: string
+  sentAt: DateTime
+  emailDeliveryStatus: EmailDeliveryStatus
+}
+
+enum CampaignEmailStatus <<Enum>> {
+  PENDING
+  RUNNING
+  PAUSED
+  COMPLETED
+}
+
+enum MailBoxType <<Enum>> {
+  GMAIL
+  OUTLOOK
+  SMTP
+  SES
+}
+
+enum EmailDeliveryStatus <<Enum>> {
+  SENT
+  OPENED
+  REPLIED
+  BOUNCED
+}
+
+enum CampaignStatus <<Enum>> {
+  DRAFT
+  PENDING_APPROVAL
+  APPROVED
+  RUNNING
+  PAUSED
+  COMPLETED
+}
+
+enum CampaignContactStatus <<Enum>> {
+  PENDING
+  ACTIVE
+  PAUSED
+  COMPLETED
+  BOUNCED
+  UNSUBSCRIBED
+}
+
+enum GlobalOutreachStatus <<Enum>> {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  BOUNCED
+  UNSUBSCRIBED
+}
+
+enum EmployeeRange <<Enum>> {
+  RANGE_0_500
+  RANGE_501_1000
+  RANGE_1001_5000
+  RANGE_5001_10000
+  RANGE_10001_PLUS
+}
+
+enum DayOfWeek <<Enum>> {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+Campaign -right[hidden]- TargetingCriteria
+Campaign -down[hidden]- CampaignContact
+Campaign -down- SendingWindow
+SendingWindow -right[hidden]- DayOfWeek
+TargetingCriteria -right[hidden]- LocationFilter
+CampaignContact -right[hidden]- CampaignEmail
+CampaignContact -down- EmailData
+EmailData -down[hidden]- AttachmentLibrary
+CampaignEmail -right[hidden]- ContactOutreachStatus
+AttachmentLibrary -right[hidden]- Message
+
+EmailData -right[hidden]- CampaignStatus
+CampaignStatus -right[hidden]- CampaignContactStatus
+CampaignContactStatus -right[hidden]- GlobalOutreachStatus
+GlobalOutreachStatus -right[hidden]- EmailDeliveryStatus
+Message -right[hidden]- MailBoxType
+MailBoxType -right[hidden]- CampaignEmailStatus
+CampaignEmailStatus -right[hidden]- EmployeeRange
+
+@enduml

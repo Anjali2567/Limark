@@ -1,0 +1,273 @@
+@startuml
+<style>
+class {
+  Padding 5
+  RoundCorner 10
+  HorizontalAlignment center
+  LineThickness 0.5
+  FontSize 12
+  LineStyle 2
+}
+
+arrow {
+  LineStyle 2
+  LineThickness 0.75
+}
+</style>
+
+skinparam {
+  BackgroundColor Transparent
+  ArrowFontColor DimGray
+  CloudBorderColor DimGray
+  class {
+    BackgroundColor<<Aggregate Root>> #D5A6BD
+    BackgroundColor<<Enum>> #D9D9D9
+    BackgroundColor<<Value Object>> #B6D7A8
+  }
+}
+
+hide circle
+hide methods
+
+class LeadDataPack <<Aggregate Root>> {
+  id: UUID
+  name: string
+  industryIds: string[]
+  active: boolean
+  createdAt: datetime
+  createdBy: string
+  updatedAt: datetime
+  updatedBy: string
+}
+
+class Industry <<Aggregate Root>> {
+  id: string
+  name: string
+  slug: string
+  description: string
+  segments: string[]
+  image: string
+  disabled: boolean
+  active: boolean
+  createdBy: string
+  createdAt: datetime
+  updatedBy: string
+  updatedAt: datetime
+}
+
+class IndustryService <<Aggregate Root>> {
+  id: string
+  industryId: string
+  serviceId: string
+}
+
+class ServiceCategory <<Aggregate Root>> {
+  id: string
+  name: string
+  active: boolean
+  createdBy: string
+  createdAt: datetime
+  updatedBy: string
+  updatedAt: datetime
+}
+
+class Service <<Aggregate Root>> {
+  id: string
+  name: string
+  slug: string
+  serviceCategoryId: string
+  disabled: boolean
+  active: boolean
+  createdBy: string
+  createdAt: datetime
+  updatedBy: string
+  updatedAt: datetime
+}
+
+class SpecificationCategory <<Aggregate Root>> {
+  id: string
+  name: string
+  type: string
+  active: boolean
+  createdBy: string
+  createdAt: datetime
+  updatedBy: string
+  updatedAt: datetime
+}
+
+class Specification <<Aggregate Root>> {
+  id: string
+  name: string
+  type: string
+  icon: string
+  specificationCategoryId: string
+  disabled: boolean
+  active: boolean
+  createdBy: string
+  createdAt: datetime
+  updatedBy: string
+  updatedAt: datetime
+}
+
+class ServiceSpecification <<Aggregate Root>> {
+  id: string
+  serviceId: string
+  specificationItemId: string
+}
+
+class Attachment <<Aggregate Root>> {
+  id: UUID
+  sourceId: UUID
+  sourceType: SourceType
+  fileName: string
+  fileType: string
+  fileUrl: string
+  sizeBytes: number
+  active: boolean
+  createdAt: datetime
+  createdBy: string
+  updatedAt: datetime
+  updatedBy: string
+}
+
+enum SourceType <<Enum>> {
+  REQUEST_FOR_QUOTE
+  REQUEST_FOR_PROPOSAL
+  SHOWCASE
+  QUOTATION
+}
+
+class EmailImage <<Aggregate Root>> {
+  id: string
+  sourceId: string
+  sourceType: EmailImageSourceType
+  resourceUrl: string
+  createdBy: string
+  createdAt: datetime
+}
+
+class Feedback <<Aggregate Root>> {
+  id: string
+  tenantId: string
+  workspaceId: string
+  userId: string
+  username: string
+  companyName: string
+  type: FeedbackType
+  message: string
+  rating: number
+  status: FeedbackStatus
+  feedbackDate: datetime
+  createdAt: datetime
+  createdBy: string
+  updatedAt: datetime
+  updatedBy: string
+}
+
+enum FeedbackType <<Enum>> {
+  FEATURE_REQUEST
+  BUG_REPORT
+  IMPROVEMENT
+  GENERAL
+}
+
+enum FeedbackStatus <<Enum>> {
+  NEW
+  REVIEWED
+  RESPONDED
+}
+
+enum EmailImageSourceType <<Enum>> {
+    DIRECT
+    CAMPAIGN
+}
+
+class UserActivityLog <<Aggregate Root>> {
+  id: string
+  tenantId: string
+  workspaceId: string
+  userId: string
+  username: string
+  message: string
+  logLevel: LogLevel
+  type: UserActivityLogType
+  createdAt: datetime
+  createdBy: string
+}
+
+enum UserActivityLogType <<Enum>> {
+    EMAIL_SENT
+    CAMPAIGN
+    CALL
+    EMAIL_OPENED
+    NOTE
+    MEETING
+}
+
+enum LogLevel <<Enum>> {
+    DEBUG
+    INFO
+    WARNING
+    ERROR
+}
+class LeadContactEvent <<Aggregate Root>> {
+  id: string
+  tenantId: string
+  workspaceId: string
+  contactId: string
+  category: LeadContactEventCategory
+  type: LeadContactEventType
+  description: string
+  sourceId: string
+  sourceType: LeadContactEventSourceType
+  eventBy: string
+  eventAt: datetime
+  active: boolean
+  createdAt: datetime
+}
+
+enum LeadContactEventCategory <<Enum>> {
+  CAMPAIGN
+  EMAIL
+  NOTE
+}
+
+enum LeadContactEventSourceType <<Enum>> {
+  CAMPAIGN
+  CAMPAIGN_EMAIL
+  CAMPAIGN_CONTACT
+  CONTACT_EMAIL
+  LEAD_NOTE
+}
+
+enum LeadContactEventType <<Enum>> {
+  CAMPAIGN_INITIATED
+  CAMPAIGN_EMAIL_SENT
+  CAMPAIGN_EMAIL_REPLIED
+  EMAIL_SENT
+  EMAIL_OPENED
+  NOTE_ADDED
+  NOTE_UPDATED
+  NOTE_DELETED
+}
+class TimezoneMapping <<Aggregate Root>> {
+  id: UUID
+  locationType: LocationType
+  locationKey: String
+  timezone: String
+  active: boolean
+  createdAt: datetime
+  updatedAt: datetime
+}
+
+enum LocationType <<Enum>> {
+  STATE
+  COUNTRY
+}
+
+TimezoneMapping -right[hidden]- LocationType
+LeadContactEvent -right[hidden]- LeadContactEventCategory
+LeadContactEvent -down[hidden]- LeadContactEventType
+LeadContactEventCategory -down[hidden]- LeadContactEventSourceType
+
+@enduml

@@ -1,0 +1,363 @@
+@startuml
+<style>
+class {
+  Padding 5
+  RoundCorner 10
+  HorizontalAlignment center
+  LineThickness 0.5
+  FontSize 12
+  LineStyle 2
+}
+
+arrow {
+  LineStyle 2
+  LineThickness 0.75
+}
+</style>
+
+skinparam {
+  BackgroundColor Transparent
+  ArrowFontColor DimGray
+  CloudBorderColor DimGray
+  class {
+    BackgroundColor<<Aggregate Root>> #D5A6BD
+    BackgroundColor<<Enum>> #D9D9D9
+    BackgroundColor<<Value Object>> #B6D7A8
+  }
+}
+
+hide circle
+hide methods
+
+class LeadCompany <<Aggregate Root>> {
+  id: String
+  zohoAccountId: String
+  name: String
+  domain: String
+  websiteUrl: String
+  linkedinUrl: String
+  twitterUrl: String
+  facebookUrl: String
+  phoneNumber: String
+  industry: String
+  revenueUsd: String
+  employeeCount: String
+  employeeRange: EmployeeRange
+  hqCity: String
+  hqState: String
+  hqCountry: String
+  postalCode: String
+  territory: String
+  region: String
+  icpTag: String
+  sicCodes: List<String>
+  naicsCodes: List<String>
+  keywords: List<String>
+  technologies: List<String>
+  scrapedTechnologies: List<String>
+  scrapedTools: List<String>
+  scrapedServices: List<String>
+  publiclyTradedSymbol: String
+  score: int
+  accountSummary: String
+  salespersonId: String
+  salespersonName: String
+  salespersonAssignAt: LocalDateTime
+  source: String
+  segment: String
+  isTargetAccount: boolean
+  leadCompanyStatus: LeadCompanyStatus
+  active: boolean
+  createdAt: LocalDateTime
+  updatedAt: LocalDateTime
+}
+
+class LeadContact <<Aggregate Root>> {
+  id: String
+  apolloId: String
+  leadCompanyId: String
+  firstName: String
+  lastName: String
+  firstNameNormalized: String
+  lastNameNormalized: String
+  fullName: String
+  title: String
+  seniority: String
+  department: String
+  email: String
+  emailStatus: String
+  phoneE164: String
+  linkedinUrl: String
+  locationCity: String
+  locationState: String
+  locationCountry: String
+  locationZip: String
+  personaMatch: String
+  personaScore: Integer
+  ownerId: String
+  consentStatus: String
+  doNotContact: boolean
+  source: String
+  notes: String
+  apolloEnriched: boolean
+  active: boolean
+  createdAt: LocalDateTime
+  updatedAt: LocalDateTime
+  dataSource: DataSource
+}
+
+class LeadCompanyEvent <<Aggregate Root>> {
+  id: String
+  leadCompanyId: String
+  type: EventType
+  title: String
+  summary: String
+  url: String
+  source: String
+  sentiment: Integer
+  publishedAt: LocalDateTime
+  detectedAt: LocalDateTime
+  uniqueHash: String
+  active: boolean
+}
+
+class CompanyContactCount <<Aggregate Root>> {
+  companyId: String
+  count: long
+}
+
+class ApolloCompanyData <<Aggregate Root>> {
+  id: String
+  leadCompanyId: String
+  type: ApolloDataType
+  data: String
+  specificationId: String
+  fetchedAt: datetime
+}
+
+class ApolloContactData <<Aggregate Root>> {
+  id: String
+  leadContactId: String
+  type: ApolloDataType
+  data: String
+  specificationId: String
+  fetchedAt: datetime
+}
+
+class LeadList <<Aggregate Root>> {
+  id: String
+  tenantId: String
+  workspaceId: String
+  name: String
+  type: LeadType
+  sourceIds: List<String>
+  active: boolean
+  createdAt: datetime
+  createdBy: string
+  updatedAt: LocalDateTime
+  updatedBy: string
+}
+
+class LeadNote <<Aggregate Root>> {
+  id: String
+  tenantId: String
+  workspaceId: String
+  note: String
+  type: LeadType
+  sourceId: String
+  active: boolean
+  createdAt: LocalDateTime
+  createdBy: string
+  updatedAt: LocalDateTime
+  updatedBy: string
+}
+
+class LeadCompanyJob <<Aggregate Root>> {
+  id: string
+  leadCompanyId: String
+  type: string
+  title: string
+  skills: List<string>
+  applyUrl: string
+  jobUrl: string
+  benefits: List<string>
+  location: string
+  department: string
+  postedDate: LocalDateTime
+  description: string
+  requirements: List<string>
+  technologies: List<String>
+  tools: List<String>
+  services: List<String>
+  active: boolean
+  createdAt: LocalDateTime
+  updatedAt: LocalDateTime
+}
+
+class ScrapeJob <<Aggregate Root>> {
+  id: String
+  companyId: String
+  scraperJobId: String
+  sourceType: ScrapeSourceType
+  sourceId: String
+  status: ScrapeJobStatus
+  scheduledAt: LocalDateTime
+  completedAt: LocalDateTime
+  createdAt: LocalDateTime
+  updatedAt: LocalDateTime
+}
+
+enum ScrapeJobStatus <<Enum>> {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum ScrapeSourceType <<Enum>> {
+  COMPANY_WEBSITE
+  COMPANY_JOB
+}
+
+enum LeadType <<Enum>> {
+    LEAD_COMPANY,
+    LEAD_CONTACT
+}
+
+enum ApolloDataType <<Enum>> {
+  PEOPLE_SEARCH,
+  SINGLE_ENRICHMENT,
+  BULK_ENRICHMENT,
+  ORGANIZATION_ENRICHMENT
+}
+
+class LeadQuery <<Aggregate Root>> {
+  id: String
+  type: LeadQueryType
+  value: String
+}
+
+class LeadContactNormalizedTitle <<Aggregate Root>> {
+  id: String
+  leadContactId: String
+  originalTitle: String
+  canonicalTitle: String
+  seniority: String
+  normalizedTitles: List<String>
+  keywords: List<String>
+  titleAbbreviations: List<String>
+  createdAt: LocalDateTime
+}
+
+enum LeadQueryType <<Enum>> {
+  COMPANY_INDUSTRY
+  COMPANY_REGION
+  CONTACT_SENIORITY
+  CONTACT_TITLE
+}
+
+
+enum LeadCompanyStatus <<Enum>> {
+  COLD
+  IN_PROGRESS
+  CONVERTED
+}
+
+enum EmployeeRange <<Enum>> {
+  RANGE_0_500
+  RANGE_501_1000
+  RANGE_1001_5000
+  RANGE_5001_10000
+  RANGE_10001_PLUS
+}
+
+enum LeadContactStatus <<Enum>> {
+  COLD
+  IN_PROGRESS
+  CONVERTED
+}
+
+enum EventType <<Enum>> {
+  NEWS
+  FUNDING
+  HIRING
+  PRODUCT
+  PARTNERSHIP
+  OTHER
+}
+
+enum DataSource <<Enum>> {
+  APOLLO
+}
+
+class ZohoContact <<Value Object>> {
+  id: String
+  tenantId: String
+  zohoContactId: String
+  email: String
+  createdAt: LocalDateTime
+}
+
+class TenantLeadFilter <<Aggregate Root>> {
+  id: String
+  tenantId: String
+  type: LeadType
+  cities: List<String>
+  states: List<String>
+  countries: List<String>
+  companyNames: List<String>
+  companyCities: List<String>
+  companyStates: List<String>
+  companyCountries: List<String>
+  regions: List<String>
+  keywords: List<String>
+  employeeRanges: List<EmployeeRange>
+  industries: List<String>
+  revenueRanges: List<String>
+  technologies: List<String>
+  titles: List<String>
+  seniority: List<String>
+  departments: List<String>
+  postalCodes: List<String>
+  sicCodes: List<String>
+  naicsCodes: List<String>
+  active: boolean
+  createdAt: LocalDateTime
+  createdBy: string
+  updatedAt: LocalDateTime
+  updatedBy: string
+}
+
+class TenantContactMetadata <<Aggregate Root>> {
+  id: String
+  tenantId: String
+  leadContactId: String
+  bdName: String
+  bdEmail: String
+  bdPhone: String
+  isrName: String
+  isrEmail: String
+  isrPhone: String
+  priority: String
+  titleCategory: String
+  createdAt: LocalDateTime
+  updatedAt: LocalDateTime
+}
+
+TenantContactMetadata "many" -right-> "1" LeadContact : leadContactId
+
+LeadCompany -down[hidden]- EmployeeRange
+LeadCompany -down[hidden]- LeadCompanyStatus
+LeadCompany -right[hidden]- LeadContact
+LeadContact -right[hidden]- LeadCompanyJobs
+
+LeadContact -down[hidden]- LeadContactStatus
+LeadContact -down[hidden]- DataSource
+
+LeadCompanyEvent -down[hidden]- EventType
+
+ScrapeJob -down[hidden]- ScrapeJobStatus
+ScrapeJob -down[hidden]- ScrapeSourceType
+ScrapeJob "many" -right-> "1" LeadCompany : companyId
+ScrapeSourceType -right[hidden]- ScrapeJobStatus
+
+@enduml

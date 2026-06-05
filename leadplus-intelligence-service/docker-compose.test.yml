@@ -1,0 +1,21 @@
+services:
+  test-db:
+    image: mongo:7.0
+    container_name: leadplus-intelligence-test-db
+    environment:
+      MONGO_INITDB_DATABASE: leadplus_intelligence_test
+    ports:
+      - "27018:27017"  # Test database port (different from dev 27017)
+    tmpfs:
+      - /data/db:rw,noexec,nosuid,size=512m  # RAM storage for fast ephemeral tests
+    command: >
+      mongod
+      --wiredTigerCacheSizeGB 0.25
+      --quiet
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# No volumes section - data is ephemeral and lost when container stops

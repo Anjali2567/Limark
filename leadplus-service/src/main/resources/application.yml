@@ -1,0 +1,210 @@
+spring:
+  application:
+    name: leadplus-service
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 30000
+  data:
+    rest:
+      enabled: false
+  liquibase:
+    enabled: false
+  sql:
+    init:
+      mode: never
+      continue-on-error: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  ai:
+    openai:
+      api-key: "dummy-key-for-staging"
+      chat:
+        options:
+          model: gpt-4.1-mini
+  cloud:
+    aws:
+      credentials:
+        access-key:
+        secret-key:
+      ses:
+        region: us-west-2
+      s3:
+        region: us-west-2
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  servlet:
+    context-path: /api
+  error:
+    include-message: always
+
+jwt:
+  secret: 23a50ad68cc4fc7077846cf33e4ef3770593ef5def04209c2f543435d1ce23f3
+  refresh-token:
+    expiration-minutes: 43200 # 30 days
+    remember-me:
+      expiration-minutes: 86400 # 60 days
+  access-token:
+    expiration-minutes: 43200 # 30 days
+
+aws:
+  ses:
+    sender: no-reply@leadplus.ai
+    email-template:
+      USER_APPROVED: leadplus-dev-user-approved
+      USER_REJECTED: leadplus-dev-user-rejected
+      VENDOR_APPROVED: leadplus-dev-vendor-approved
+      VENDOR_REJECTED: leadplus-dev-vendor-rejected
+      RESET_PASSWORD: leadplus-dev-reset-password
+      WORKSPACE_INVITATION: leadplus-dev-workspace-invitation
+      EMAIL_VERIFY: leadplus-dev-email-verify
+      OTP_VERIFICATION: leadplus-dev-otp-verify
+      FEEDBACK_RECEIVED: leadplus-dev-feedback-received;
+      COLLABORATOR_INVITE: leadplus-dev-collaborator-invite
+      COLLABORATOR_ACCESS_CHANGE: leadplus-dev-collaborator-access-change
+  s3:
+    bucket-name: leadplus-bucket-dev
+  cloudfront:
+    url: https://dev.leadplus.ai
+
+springdoc:
+  swagger-ui:
+    operations-sorter: alpha
+    try-it-out-enabled: true
+    display-request-duration: true
+    filter: true
+    persist-authorization: true
+  show-actuator: true
+
+campaign:
+  orchestration:
+    scheduler:
+      enabled: false
+      cron: "0 * * * * MON-FRI"
+  contacts:
+    last-email-throttle-days: 7
+    sequence-cooldown-days: 90
+
+mailbox:
+  daily-send-limit: 30
+  scheduler:
+    enabled: false
+    cron: "0 0 0 * * *"
+
+authentication:
+  apikey:
+  lead-apiKey:
+
+apollo:
+  enabled: false
+  baseUrl: https://api.apollo.io/api/v1
+  apiKey:
+
+management:
+  endpoint:
+    health:
+      show-details: when-authorized
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+client:
+  url: http://localhost:3000
+
+workspace:
+  max-per-user: 5
+
+azure:
+  clientId:
+  tenantId:
+  clientSecret:
+  graphBaseUrl: https://graph.microsoft.com/v1.0
+  authentication:
+    url: https://login.microsoftonline.com
+    scope: https://graph.microsoft.com/User.Read https://graph.microsoft.com/Mail.Send offline_access https://graph.microsoft.com/Mail.ReadWrite
+    redirectUri: /leadgen/settings/communications/
+  scheduler:
+    enabled: true
+    cron: "0 0 0 * * *"
+
+google:
+  client-id:
+  client-secret:
+  redirect-uri: /leadgen/settings/communications/
+  scheduler:
+    enabled: true
+    cron: "0 0 0 * * *"
+  required-scopes:
+    - https://www.googleapis.com/auth/gmail.readonly
+    - https://www.googleapis.com/auth/userinfo.profile
+    - openid
+    - https://www.googleapis.com/auth/gmail.send
+    - https://www.googleapis.com/auth/gmail.labels
+    - https://www.googleapis.com/auth/userinfo.email
+  analytics:
+    property-id: 532189681
+    credentials:
+      type: service_account
+      project-id: lead-483610
+      private-key-id:
+      private-key:
+      client-email: analytics-reader@lead-483610.iam.gserviceaccount.com
+      client-id:
+      token-uri: https://oauth2.googleapis.com/token
+
+zoho:
+  client-id:
+  client-secret:
+  accounts-domain: https://accounts.zoho.in
+  api-domain: https://www.zohoapis.in
+  redirect-uri: /leadgen/settings/zoho/
+
+hubspot:
+  client-id:
+  client-secret:
+  api-domain: https://api.hubapi.com
+  redirect-uri: /leadgen/settings/hubspot/
+
+scraper:
+  base-url: https://playwright.dev.limarktech.com
+  api-key:
+  jobs-per-hour: 10
+  lookback-days: 30
+  job-detail-jobs-per-run: 20
+  scheduler:
+    scheduling:
+      enabled: false
+      cron: "0 0 * * * *"
+    polling:
+      enabled: false
+      cron: "0 */30 * * * *"
+    job-detail:
+      enabled: false
+      cron: "0 30 * * * *"
+
+mail-guard:
+  enabled: true
+
+announcement:
+  orchestration:
+    scheduler:
+      enabled: false
+      cron: "0 */2 * * * *"
+      throttle-per-hour: 2000
+
+app:
+  google:
+    analytics:
+      enabled: false
+  spring-ai:
+    enabled: false

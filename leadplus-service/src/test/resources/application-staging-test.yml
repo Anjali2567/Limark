@@ -1,0 +1,88 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+  liquibase:
+    enabled: false
+  ai:
+    openai:
+      api-key: "dummy-key-for-testing"
+      chat:
+        options:
+          model: gpt-4.1-mini
+  autoconfigure:
+    exclude:
+      - org.springframework.data.rest.webmvc.config.RepositoryRestMvcAutoConfiguration
+
+# Required @Value placeholders
+announcement:
+  orchestration:
+    scheduler:
+      throttle-per-hour: 20
+
+aws:
+  cloudfront:
+    url: https://cdn.example.com
+  s3:
+    bucket-name: leadplus-staging
+  ses:
+    sender: test@example.com
+
+campaign:
+  contacts:
+    last-email-throttle-days: 3
+    sequence-cooldown-days: 1
+
+client:
+  url: http://localhost:3000
+
+google:
+  analytics:
+    property-id: G-XXXXX
+
+jwt:
+  access-token:
+    expiration-minutes: 60
+  refresh-token:
+    expiration-minutes: 1440
+    remember-me:
+      expiration-minutes: 10080
+  secret: test-secret-key-for-staging
+
+mail-guard:
+  enabled: false
+
+mailbox:
+  daily-send-limit: 100
+
+workspace:
+  max-per-user: 10
+
+app:
+  google:
+    analytics:
+      enabled: false
+
+logging:
+  level:
+    ai.leadplus: DEBUG
+    org.springframework.data.jpa: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

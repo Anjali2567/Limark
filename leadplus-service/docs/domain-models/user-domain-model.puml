@@ -1,0 +1,209 @@
+@startuml
+<style>
+class {
+  Padding 5
+  RoundCorner 10
+  HorizontalAlignment center
+  LineThickness 0.5
+  FontSize 12
+  LineStyle 2
+}
+
+arrow {
+  LineStyle 2
+  LineThickness 0.75
+}
+</style>
+
+skinparam {
+  BackgroundColor Transparent
+  ArrowFontColor DimGray
+  CloudBorderColor DimGray
+  class {
+    BackgroundColor<<Aggregate Root>> #D5A6BD
+    BackgroundColor<<Enum>> #D9D9D9
+    BackgroundColor<<Value Object>> #B6D7A8
+  }
+}
+
+hide circle
+hide methods
+
+class User <<Aggregate Root>> {
+  id: UUID
+  tenantId: string
+  name: string
+  email: string
+  phoneNumber: string
+  company: string
+  password: string
+  draft: boolean
+  emailVerified: boolean
+  emailVerificationToken: string
+  identityProviders: IdentityProvider[]
+  status: UserStatus
+  active: boolean
+  lastLoginAt: datetime
+  createdAt: datetime
+  updatedAt: datetime
+}
+
+class IdentityProvider <<Value Object>> {
+  type: IdentityProviderType
+  personId: string
+}
+
+class IdentityProviderType <<Enum>> {
+  GOOGLE
+  FACEBOOK
+  LINKEDIN
+  APPLE
+  MICROSOFT
+}
+
+enum UserStatus <<Enum>> {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum UserRole <<Enum>> {
+  USER (Remove this)
+  ADMIN
+  TENANT_OWNER (Move to tenant)
+  CUSTOMER
+  VENDOR
+}
+
+class Tenant <<Aggregate Root>> {
+  id: UUID
+  name: String
+  domain: String
+  ownerId: String
+  announcementFromEmail: String
+  announcementSenderName: String
+  announcementType: MailBoxType
+  announcementMetaData: MailboxProviderConfig
+  ccRecipients: Recipient[]
+  bccRecipients: Recipient[]
+  createdAt: Timestamp
+  updatedAt: Timestamp
+}
+
+enum Module <<Enum>> {
+  CUSTOMER
+  VENDOR
+  LEAD_GENERATION
+  ADMINISTRATION
+}
+
+class Workspace <<Aggregate Root>> {
+  id: UUID
+  name: string
+  ownerId: UUID
+  tenantId: string
+  ccRecipients: Recipient[]
+  bccRecipients: Recipient[]
+  createdBy: UUID
+  createdAt: datetime
+  updatedBy: UUID
+  updatedAt: datetime
+}
+
+class Recipient <<Value Object>> {
+  name: string
+  email: string
+}
+
+class Customer <<Aggregate Root>> {
+  id: UUID
+  userId: UUID
+  tenantId: string
+
+  createdAt: datetime
+  updatedAt: datetime
+}
+
+class Mailbox <<Aggregate Root>> {
+  id: UUID
+  userId: UUID
+  workspaceId: UUID
+  emailAddress: string
+  type: MailboxType
+  metaData: MailboxProviderConfig
+  emailsSentToday: number
+  active: boolean
+  createdAt: datetime
+  updatedAt: datetime
+}
+
+class MailboxProviderConfig <<Value Object>> {
+  azureId: string
+  refreshToken: string
+  connectedAt: datetime
+  smtpApiKey: string
+  awsSESVerificationState: AwsSESVerificationState
+}
+
+class AwsSESVerificationState <<Enum>> {
+  VERIFIED
+  UNVERIFIED
+  PENDING
+}
+
+class MailboxType <<Enum>> {
+  GMAIL
+  OUTLOOK
+  SMTP
+  SES
+}
+
+class RefreshToken <<Aggregate Root>> {
+  id: UUID
+  userId: UUID
+  token: string
+  refreshCount: int
+  issuedAt: datetime
+  expiresAt: datetime
+  lastUsedAt: datetime
+  revoked: boolean
+}
+
+class WorkspaceUser <<Aggregate Root>> {
+    id: UUID
+    tenantId: UUID
+    workspaceId: UUID
+    userId: UUID
+    role: WorkspaceUserRole
+    active: boolean
+    workspaceUserStatus: WorkspaceUserStatus
+    invitationToken: UUID
+    createdBy: UUID
+    createdAt: datetime
+    updatedBy: UUID
+    updatedAt: datetime
+}
+
+class WorkspaceUserRole <<Enum>> {
+    OWNER
+    MEMBER
+    WORKSPACE_ADMIN
+}
+
+class WorkspaceUserStatus <<Enum>> {
+    INVITED
+    ACCEPTED
+    REVOKED
+}
+
+User -right- IdentityProvider
+IdentityProvider -right[hidden]- IdentityProviderType
+User -left[hidden]- UserStatus
+User -down[hidden]- WorkspaceUser
+Workspace -down[hidden]- Mailbox
+Workspace -right[hidden]- Recipient
+WorkspaceUser -right[hidden]- WorkspaceUserRole
+Mailbox -right[hidden]- MailboxType
+Mailbox -down[hidden]- RefreshToken
+
+@enduml

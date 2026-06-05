@@ -1,0 +1,669 @@
+
+> Task :compileJava
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/collaborators/CollaboratorDto.java:38: error: incompatible types: Long cannot be converted to String
+                .id(collaborator.getId())
+                                      ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/collaborators/CollaboratorDto.java:52: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/users/UserDto.java:41: error: incompatible types: Long cannot be converted to String
+                .id(user.getId())
+                              ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/users/UserDto.java:66: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/users/UserService.java:174: error: incompatible types: String cannot be converted to Long
+        return userRepository.findByIdAndActiveTrue(userId)
+                                                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/users/UserService.java:212: error: no suitable method found for findAllByIdInAndActiveTrue(List<String>)
+        return userRepository.findAllByIdInAndActiveTrue(userIds).stream()
+                             ^
+    method UserRepository.findAllByIdInAndActiveTrue(Set<String>) is not applicable
+      (argument mismatch; List<String> cannot be converted to Set<String>)
+    method UserRepository.findAllByIdInAndActiveTrue(Collection<Long>) is not applicable
+      (argument mismatch; List<String> cannot be converted to Collection<Long>)
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/users/UserSearchService.java:25: warning: [removal] <T>where(Specification<T>) in Specification has been deprecated and marked for removal
+        Specification<User> spec = Specification.where(null);
+                                                ^
+  where T is a type-variable:
+    T extends Object declared in method <T>where(Specification<T>)
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/requestforquotes/RequestForQuoteService.java:52: error: incompatible types: Long cannot be converted to String
+        collaboratorService.createOwner(saved.getId(), SourcingRequestType.REQUEST_FOR_QUOTE, saved.getUserId());
+                                                   ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/requestforquotes/RequestForQuoteService.java:134: error: incompatible types: String cannot be converted to Long
+        return requestForQuoteRepository.findByIdAndActiveTrue(id)
+                                                               ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/requestforquotes/RequestForQuoteService.java:139: error: incompatible types: Long cannot be converted to String
+        List<AttachmentDto> attachments = attachmentService.getAttachments(requestForQuote.getId(), SourceType.REQUEST_FOR_QUOTE);
+                                                                                                ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/quotations/QuotationService.java:117: error: incompatible types: String cannot be converted to Long
+        return quotationRepository.findByIdAndVendorIdAndSourceTypeAndActiveTrue(id, vendorId, sourceType)
+                                                                                 ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/quotations/QuotationService.java:122: error: incompatible types: String cannot be converted to Long
+        return quotationRepository.findByIdAndActiveTrue(id)
+                                                         ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/quotations/QuotationService.java:128: error: incompatible types: String cannot be converted to Long
+        return quotationRepository.findByIdAndSourceTypeAndActiveTrue(id, sourceType)
+                                                                      ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/requestforquotes/RequestForQuoteDto.java:48: error: incompatible types: Long cannot be converted to String
+                .id(entity.getId())
+                                ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/requestforquotes/RequestForQuoteDto.java:67: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceDto.java:31: error: incompatible types: Long cannot be converted to String
+                .id(entity.getId())
+                                ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceDto.java:46: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/attachments/AttachmentDto.java:35: error: incompatible types: Long cannot be converted to String
+                .id(attachment.getId())
+                                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/attachments/AttachmentDto.java:52: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorService.java:314: error: incompatible types: String cannot be converted to Long
+        return vendorRepository.findByIdAndActiveTrue(id)
+                                                      ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorService.java:322: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        long count = vendorRepository.countAllByIdInAndActiveTrue(vendorIds);
+                                                                  ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorService.java:332: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        return vendorRepository.findAllByIdInAndActiveTrue(vendorIds).stream()
+                                                           ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorService.java:342: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        long count = vendorRepository.countByIdInAndActiveTrue(ids);
+                                                               ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorDto.java:62: error: incompatible types: Long cannot be converted to String
+                .id(vendor.getId())
+                                ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorDto.java:97: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceCatalogueService.java:70: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        return serviceRepository.findAllByIdInAndDisabledFalseAndActiveTrue(serviceIds)
+                                                                            ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceCatalogueService.java:95: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        return serviceRepository.findAllByIdInAndDisabledFalseAndActiveTrue(ids)
+                                                                            ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceCatalogueService.java:140: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        long count = serviceRepository.countAllByIdInAndDisabledFalseAndActiveTrue(serviceIds);
+                                                                                   ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceCatalogueService.java:157: error: incompatible types: List<Long> cannot be converted to List<String>
+                .toList();
+                       ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceCatalogueService.java:167: error: incompatible types: String cannot be converted to Long
+        return serviceRepository.findByIdAndActiveTrue(id)
+                                                       ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/question/QuestionService.java:168: error: incompatible types: String cannot be converted to Long
+        return questionRepository.findByIdAndActiveTrue(id)
+                                                        ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/question/QuestionService.java:173: error: incompatible types: List<String> cannot be converted to Iterable<Long>
+        return questionRepository.findAllById(ids)
+                                              ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:65: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        return specificationRepository.findAllByIdInAndDisabledFalseAndActiveTrue(ids)
+                                                                                  ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:81: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        return specificationRepository.findAllByIdInAndDisabledFalseAndActiveTrue(ids)
+                                                                                  ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:108: error: incompatible types: String cannot be converted to Long
+        if (!StringUtils.hasText(id) || !specificationRepository.existsByIdAndDisabledFalseAndActiveTrue(id)) {
+                                                                                                         ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:116: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        long count = specificationRepository.countAllByIdInAndDisabledFalseAndActiveTrue(ids);
+                                                                                         ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:123: error: incompatible types: String cannot be converted to Long
+        return specificationRepository.findByIdAndActiveTrue(id)
+                                                             ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:141: error: incompatible types: List<Long> cannot be converted to List<String>
+                .stream().map(Specification::getId).toList();
+                                                          ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:73: error: incompatible types: String cannot be converted to Long
+        return industryRepository.findByIdAndActiveTrue(id)
+                                                        ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:110: error: incompatible types: String cannot be converted to Long
+        if (!industryRepository.existsByIdAndDisabledFalseAndActiveTrue(industryId)) {
+                                                                        ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:119: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        long count = industryRepository.countByIdInAndDisabledFalseAndActiveTrue(industryIds);
+                                                                                 ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:130: error: incompatible types: List<String> cannot be converted to Collection<Long>
+        long count = industryRepository.countByIdInAndActiveTrue(ids);
+                                                                 ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:135: error: incompatible types: String cannot be converted to Long
+        return industryRepository.existsByIdAndActiveTrue(id);
+                                                          ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:140: error: incompatible types: Collection<String> cannot be converted to Collection<Long>
+        return industryRepository.findAllByIdInAndActiveTrue(ids);
+                                                             ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:151: error: incompatible types: List<Long> cannot be converted to List<String>
+                .stream().map(Industry::getId).toList();
+                                                     ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leaddatapacks/LeadDataPackService.java:67: error: incompatible types: String cannot be converted to Long
+        return leadDataPackRepository.findByIdAndActiveTrue(id)
+                                                            ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leaddatapacks/LeadDataPackService.java:78: error: incompatible types: Collection<String> cannot be converted to Collection<Long>
+        return leadDataPackRepository.findAllByIdInAndActiveTrue(ids);
+                                                                 ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationDto.java:32: error: incompatible types: Long cannot be converted to String
+                .id(entity.getId())
+                                ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationDto.java:48: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leaddatapacks/LeadDataPackDto.java:31: error: incompatible types: Long cannot be converted to String
+                .id(leadDataPack.getId())
+                                      ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leaddatapacks/LeadDataPackDto.java:45: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryDto.java:33: error: incompatible types: Long cannot be converted to String
+                .id(industry.getId())
+                                  ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryDto.java:50: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specificationcategories/SpecificationCategoryService.java:48: error: incompatible types: String cannot be converted to Long
+        if (!specificationCategoryRepository.existsByIdAndActiveTrue(id)) {
+                                                                     ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specificationcategories/SpecificationCategoryService.java:60: error: incompatible types: String cannot be converted to Long
+        return specificationCategoryRepository.findByIdAndActiveTrue(id)
+                                                                     ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specificationcategories/SpecificationCategoryDto.java:29: error: incompatible types: Long cannot be converted to String
+                .id(entity.getId())
+                                ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specificationcategories/SpecificationCategoryDto.java:42: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/questionsection/QuestionSectionService.java:40: error: incompatible types: String cannot be converted to Long
+        return questionSectionRepository.findByIdAndActiveTrue(id)
+                                                               ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/questionsection/QuestionSectionService.java:87: error: incompatible types: inference variable K has incompatible bounds
+                .collect(java.util.stream.Collectors.toMap(QuestionSection::getId, s -> s));
+                        ^
+    equality constraints: String
+    lower bounds: Long
+  where K,T,U are type-variables:
+    K extends Object declared in method <T,K,U>toMap(Function<? super T,? extends K>,Function<? super T,? extends U>)
+    T extends Object declared in method <T,K,U>toMap(Function<? super T,? extends K>,Function<? super T,? extends U>)
+    U extends Object declared in method <T,K,U>toMap(Function<? super T,? extends K>,Function<? super T,? extends U>)
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/question/QuestionDto.java:33: error: incompatible types: Long cannot be converted to String
+                .id(question.getId())
+                                  ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/question/QuestionDto.java:50: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/questionsection/QuestionSectionDto.java:28: error: incompatible types: Long cannot be converted to String
+                .id(questionSection.getId())
+                                         ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/questionsection/QuestionSectionDto.java:41: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/servicecategories/ServiceCategoryService.java:51: error: incompatible types: String cannot be converted to Long
+        if (!serviceCategoryRepository.existsByIdAndActiveTrue(id)) {
+                                                               ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/servicecategories/ServiceCategoryService.java:63: error: incompatible types: String cannot be converted to Long
+        return serviceCategoryRepository.findByIdAndActiveTrue(id)
+                                                               ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/servicecategories/ServiceCategoryDto.java:28: error: incompatible types: Long cannot be converted to String
+                .id(entity.getId())
+                                ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/servicecategories/ServiceCategoryDto.java:40: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/quotations/QuotationDto.java:50: error: incompatible types: Long cannot be converted to String
+                .id(entity.getId())
+                                ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/quotations/QuotationDto.java:81: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/attachments/AttachmentService.java:43: error: no suitable method found for uploadFile(MultipartFile,String,Long)
+        String resourceUrl = awsS3Service.uploadFile(file, createFolderName(sourceType), attachment.getId());
+                                         ^
+    method AwsS3Service.uploadFile(MultipartFile,String,String) is not applicable
+      (argument mismatch; Long cannot be converted to String)
+    method AwsS3Service.uploadFile(File,String,String) is not applicable
+      (argument mismatch; MultipartFile cannot be converted to File)
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/attachments/AttachmentService.java:83: error: incompatible types: String cannot be converted to Long
+        return attachmentRepository.findByIdAndSourceTypeAndActiveTrue(id, sourceType)
+                                                                       ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadqueries/LeadQueryDto.java:25: error: incompatible types: Long cannot be converted to String
+                .id(leadQuery.getId())
+                                   ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadqueries/LeadQueryDto.java:34: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcompany/LeadCompanyDto.java:78: error: incompatible types: Long cannot be converted to String
+                .id(leadCompany.getId())
+                                     ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcompany/LeadCompanyDto.java:124: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcontact/LeadContactDto.java:56: error: incompatible types: Long cannot be converted to String
+                .id(leadContact.getId())
+                                     ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcontact/LeadContactDto.java:93: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcontactnormalizedtitle/LeadContactNormalizedTitleDto.java:34: error: incompatible types: Long cannot be converted to String
+                .id(leadContactNormalizedTitle.getId())
+                                                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcontactnormalizedtitle/LeadContactNormalizedTitleDto.java:48: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/messages/MessageService.java:36: error: incompatible types: Long cannot be converted to String
+            savedMessage.setConversationId(savedMessage.getId());
+                                                             ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/messages/MessageDto.java:34: error: incompatible types: Long cannot be converted to String
+                .id(message.getId())
+                                 ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/messages/MessageDto.java:51: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/refreshtoken/RefreshTokenService.java:157: error: incompatible types: Long cannot be converted to String
+                .personId(userInfo.getId())
+                                        ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/auth/AuthenticationService.java:53: error: incompatible types: Long cannot be converted to String
+                userResponse.getId(),
+                                  ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/auth/AuthenticationService.java:65: error: incompatible types: Long cannot be converted to String
+                userResponse.getId(),
+                                  ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/mailboxes/MailboxService.java:211: error: incompatible types: String cannot be converted to Long
+        return mailboxRepository.findByIdAndActiveTrue(mailboxId)
+                                                       ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/infrastructure/google/label/GmailLabelClient.java:45: error: incompatible types: Long cannot be converted to String
+            return created.getId();
+                                ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/infrastructure/google/label/GmailLabelClient.java:102: error: incompatible types: Optional<Long> cannot be converted to Optional<String>
+                .findFirst();
+                          ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/mailboxes/MailboxDto.java:35: error: incompatible types: Long cannot be converted to String
+                .id(mailBox.getId())
+                                 ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/mailboxes/MailboxDto.java:51: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaigns/CampaignDto.java:53: error: incompatible types: Long cannot be converted to String
+                .id(campaign.getId())
+                                  ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaigns/CampaignDto.java:78: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaignemails/CampaignEmailDto.java:35: error: incompatible types: Long cannot be converted to String
+                .id(campaignEmail.getId())
+                                       ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaignemails/CampaignEmailDto.java:50: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaigncontacts/CampaignContactDto.java:35: error: incompatible types: Long cannot be converted to String
+                .id(campaignContact.getId())
+                                         ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaigncontacts/CampaignContactDto.java:54: error: incompatible types: String cannot be converted to Long
+                .id(id)
+                    ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaigncontacts/CampaignContactInfoDto.java:36: error: incompatible types: Long cannot be converted to String
+                .id(campaignContact.getId())
+                                         ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/tenants/TenantService.java:112: error: incompatible types: String cannot be converted to Long
+        return tenantRepository.findById(tenantId)
+                                         ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/tenants/TenantService.java:141: error: incompatible types: Long cannot be converted to String
+        zohoCompanySyncService.syncCompanies(tenant.getZohoRefreshToken(), tenant.getId());
+                                                                                       ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/tenants/TenantService.java:142: error: incompatible types: Long cannot be converted to String
+        zohoContactSyncService.syncContacts(tenant.getZohoRefreshToken(), tenant.getId());
+                                                                                      ^
+/Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/tenants/TenantService.java:176: error: incompatible types: Long cannot be converted to String
+        hubSpotCompanySyncService.syncCompanies(tenant.getHubspotRefreshToken(), tenant.getId());
+                                                                                             ^
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+100 errors
+1 warning
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///Users/ramesh/Workspace/leadplus/leadplus-service/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/users/UserService.java:212: error: no suitable method found for findAllByIdInAndActiveTrue(List<String>)
+          return userRepository.findAllByIdInAndActiveTrue(userIds).stream()
+                               ^
+      method UserRepository.findAllByIdInAndActiveTrue(Set<String>) is not applicable
+        (argument mismatch; List<String> cannot be converted to Set<String>)
+      method UserRepository.findAllByIdInAndActiveTrue(Collection<Long>) is not applicable
+        (argument mismatch; List<String> cannot be converted to Collection<Long>)
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/attachments/AttachmentService.java:43: error: no suitable method found for uploadFile(MultipartFile,String,Long)
+          String resourceUrl = awsS3Service.uploadFile(file, createFolderName(sourceType), attachment.getId());
+                                           ^
+      method AwsS3Service.uploadFile(MultipartFile,String,String) is not applicable
+        (argument mismatch; Long cannot be converted to String)
+      method AwsS3Service.uploadFile(File,String,String) is not applicable
+        (argument mismatch; MultipartFile cannot be converted to File)
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/collaborators/CollaboratorDto.java:38: error: incompatible types: Long cannot be converted to String
+                  .id(collaborator.getId())
+                                        ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/collaborators/CollaboratorDto.java:52: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/users/UserDto.java:41: error: incompatible types: Long cannot be converted to String
+                  .id(user.getId())
+                                ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/users/UserDto.java:66: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/users/UserService.java:174: error: incompatible types: String cannot be converted to Long
+          return userRepository.findByIdAndActiveTrue(userId)
+                                                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/requestforquotes/RequestForQuoteService.java:52: error: incompatible types: Long cannot be converted to String
+          collaboratorService.createOwner(saved.getId(), SourcingRequestType.REQUEST_FOR_QUOTE, saved.getUserId());
+                                                     ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/requestforquotes/RequestForQuoteService.java:134: error: incompatible types: String cannot be converted to Long
+          return requestForQuoteRepository.findByIdAndActiveTrue(id)
+                                                                 ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/requestforquotes/RequestForQuoteService.java:139: error: incompatible types: Long cannot be converted to String
+          List<AttachmentDto> attachments = attachmentService.getAttachments(requestForQuote.getId(), SourceType.REQUEST_FOR_QUOTE);
+                                                                                                  ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/quotations/QuotationService.java:117: error: incompatible types: String cannot be converted to Long
+          return quotationRepository.findByIdAndVendorIdAndSourceTypeAndActiveTrue(id, vendorId, sourceType)
+                                                                                   ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/quotations/QuotationService.java:122: error: incompatible types: String cannot be converted to Long
+          return quotationRepository.findByIdAndActiveTrue(id)
+                                                           ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/quotations/QuotationService.java:128: error: incompatible types: String cannot be converted to Long
+          return quotationRepository.findByIdAndSourceTypeAndActiveTrue(id, sourceType)
+                                                                        ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/requestforquotes/RequestForQuoteDto.java:48: error: incompatible types: Long cannot be converted to String
+                  .id(entity.getId())
+                                  ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/requestforquotes/RequestForQuoteDto.java:67: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceDto.java:31: error: incompatible types: Long cannot be converted to String
+                  .id(entity.getId())
+                                  ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceDto.java:46: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/attachments/AttachmentDto.java:35: error: incompatible types: Long cannot be converted to String
+                  .id(attachment.getId())
+                                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/attachments/AttachmentDto.java:52: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorService.java:314: error: incompatible types: String cannot be converted to Long
+          return vendorRepository.findByIdAndActiveTrue(id)
+                                                        ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorService.java:322: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          long count = vendorRepository.countAllByIdInAndActiveTrue(vendorIds);
+                                                                    ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorService.java:332: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          return vendorRepository.findAllByIdInAndActiveTrue(vendorIds).stream()
+                                                             ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorService.java:342: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          long count = vendorRepository.countByIdInAndActiveTrue(ids);
+                                                                 ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorDto.java:62: error: incompatible types: Long cannot be converted to String
+                  .id(vendor.getId())
+                                  ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/vendors/VendorDto.java:97: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceCatalogueService.java:70: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          return serviceRepository.findAllByIdInAndDisabledFalseAndActiveTrue(serviceIds)
+                                                                              ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceCatalogueService.java:95: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          return serviceRepository.findAllByIdInAndDisabledFalseAndActiveTrue(ids)
+                                                                              ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceCatalogueService.java:140: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          long count = serviceRepository.countAllByIdInAndDisabledFalseAndActiveTrue(serviceIds);
+                                                                                     ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceCatalogueService.java:157: error: incompatible types: List<Long> cannot be converted to List<String>
+                  .toList();
+                         ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/services/ServiceCatalogueService.java:167: error: incompatible types: String cannot be converted to Long
+          return serviceRepository.findByIdAndActiveTrue(id)
+                                                         ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/question/QuestionService.java:168: error: incompatible types: String cannot be converted to Long
+          return questionRepository.findByIdAndActiveTrue(id)
+                                                          ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/question/QuestionService.java:173: error: incompatible types: List<String> cannot be converted to Iterable<Long>
+          return questionRepository.findAllById(ids)
+                                                ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:65: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          return specificationRepository.findAllByIdInAndDisabledFalseAndActiveTrue(ids)
+                                                                                    ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:81: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          return specificationRepository.findAllByIdInAndDisabledFalseAndActiveTrue(ids)
+                                                                                    ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:108: error: incompatible types: String cannot be converted to Long
+          if (!StringUtils.hasText(id) || !specificationRepository.existsByIdAndDisabledFalseAndActiveTrue(id)) {
+                                                                                                           ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:116: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          long count = specificationRepository.countAllByIdInAndDisabledFalseAndActiveTrue(ids);
+                                                                                           ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:123: error: incompatible types: String cannot be converted to Long
+          return specificationRepository.findByIdAndActiveTrue(id)
+                                                               ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationService.java:141: error: incompatible types: List<Long> cannot be converted to List<String>
+                  .stream().map(Specification::getId).toList();
+                                                            ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:73: error: incompatible types: String cannot be converted to Long
+          return industryRepository.findByIdAndActiveTrue(id)
+                                                          ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:110: error: incompatible types: String cannot be converted to Long
+          if (!industryRepository.existsByIdAndDisabledFalseAndActiveTrue(industryId)) {
+                                                                          ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:119: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          long count = industryRepository.countByIdInAndDisabledFalseAndActiveTrue(industryIds);
+                                                                                   ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:130: error: incompatible types: List<String> cannot be converted to Collection<Long>
+          long count = industryRepository.countByIdInAndActiveTrue(ids);
+                                                                   ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:135: error: incompatible types: String cannot be converted to Long
+          return industryRepository.existsByIdAndActiveTrue(id);
+                                                            ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:140: error: incompatible types: Collection<String> cannot be converted to Collection<Long>
+          return industryRepository.findAllByIdInAndActiveTrue(ids);
+                                                               ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryService.java:151: error: incompatible types: List<Long> cannot be converted to List<String>
+                  .stream().map(Industry::getId).toList();
+                                                       ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leaddatapacks/LeadDataPackService.java:67: error: incompatible types: String cannot be converted to Long
+          return leadDataPackRepository.findByIdAndActiveTrue(id)
+                                                              ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leaddatapacks/LeadDataPackService.java:78: error: incompatible types: Collection<String> cannot be converted to Collection<Long>
+          return leadDataPackRepository.findAllByIdInAndActiveTrue(ids);
+                                                                   ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationDto.java:32: error: incompatible types: Long cannot be converted to String
+                  .id(entity.getId())
+                                  ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specifications/SpecificationDto.java:48: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leaddatapacks/LeadDataPackDto.java:31: error: incompatible types: Long cannot be converted to String
+                  .id(leadDataPack.getId())
+                                        ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leaddatapacks/LeadDataPackDto.java:45: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryDto.java:33: error: incompatible types: Long cannot be converted to String
+                  .id(industry.getId())
+                                    ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/industries/IndustryDto.java:50: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specificationcategories/SpecificationCategoryService.java:48: error: incompatible types: String cannot be converted to Long
+          if (!specificationCategoryRepository.existsByIdAndActiveTrue(id)) {
+                                                                       ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specificationcategories/SpecificationCategoryService.java:60: error: incompatible types: String cannot be converted to Long
+          return specificationCategoryRepository.findByIdAndActiveTrue(id)
+                                                                       ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specificationcategories/SpecificationCategoryDto.java:29: error: incompatible types: Long cannot be converted to String
+                  .id(entity.getId())
+                                  ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/specificationcategories/SpecificationCategoryDto.java:42: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/questionsection/QuestionSectionService.java:40: error: incompatible types: String cannot be converted to Long
+          return questionSectionRepository.findByIdAndActiveTrue(id)
+                                                                 ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/questionsection/QuestionSectionService.java:87: error: incompatible types: inference variable K has incompatible bounds
+                  .collect(java.util.stream.Collectors.toMap(QuestionSection::getId, s -> s));
+                          ^
+      equality constraints: String
+      lower bounds: Long
+    where K,T,U are type-variables:
+      K extends Object declared in method <T,K,U>toMap(Function<? super T,? extends K>,Function<? super T,? extends U>)
+      T extends Object declared in method <T,K,U>toMap(Function<? super T,? extends K>,Function<? super T,? extends U>)
+      U extends Object declared in method <T,K,U>toMap(Function<? super T,? extends K>,Function<? super T,? extends U>)
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/question/QuestionDto.java:33: error: incompatible types: Long cannot be converted to String
+                  .id(question.getId())
+                                    ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/question/QuestionDto.java:50: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/questionsection/QuestionSectionDto.java:28: error: incompatible types: Long cannot be converted to String
+                  .id(questionSection.getId())
+                                           ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/questionsection/QuestionSectionDto.java:41: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/servicecategories/ServiceCategoryService.java:51: error: incompatible types: String cannot be converted to Long
+          if (!serviceCategoryRepository.existsByIdAndActiveTrue(id)) {
+                                                                 ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/servicecategories/ServiceCategoryService.java:63: error: incompatible types: String cannot be converted to Long
+          return serviceCategoryRepository.findByIdAndActiveTrue(id)
+                                                                 ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/servicecategories/ServiceCategoryDto.java:28: error: incompatible types: Long cannot be converted to String
+                  .id(entity.getId())
+                                  ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/servicecategories/ServiceCategoryDto.java:40: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/quotations/QuotationDto.java:50: error: incompatible types: Long cannot be converted to String
+                  .id(entity.getId())
+                                  ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/quotations/QuotationDto.java:81: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/attachments/AttachmentService.java:83: error: incompatible types: String cannot be converted to Long
+          return attachmentRepository.findByIdAndSourceTypeAndActiveTrue(id, sourceType)
+                                                                         ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadqueries/LeadQueryDto.java:25: error: incompatible types: Long cannot be converted to String
+                  .id(leadQuery.getId())
+                                     ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadqueries/LeadQueryDto.java:34: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcompany/LeadCompanyDto.java:78: error: incompatible types: Long cannot be converted to String
+                  .id(leadCompany.getId())
+                                       ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcompany/LeadCompanyDto.java:124: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcontact/LeadContactDto.java:56: error: incompatible types: Long cannot be converted to String
+                  .id(leadContact.getId())
+                                       ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcontact/LeadContactDto.java:93: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcontactnormalizedtitle/LeadContactNormalizedTitleDto.java:34: error: incompatible types: Long cannot be converted to String
+                  .id(leadContactNormalizedTitle.getId())
+                                                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/leadcontactnormalizedtitle/LeadContactNormalizedTitleDto.java:48: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/messages/MessageService.java:36: error: incompatible types: Long cannot be converted to String
+              savedMessage.setConversationId(savedMessage.getId());
+                                                               ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/messages/MessageDto.java:34: error: incompatible types: Long cannot be converted to String
+                  .id(message.getId())
+                                   ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/messages/MessageDto.java:51: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/refreshtoken/RefreshTokenService.java:157: error: incompatible types: Long cannot be converted to String
+                  .personId(userInfo.getId())
+                                          ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/auth/AuthenticationService.java:53: error: incompatible types: Long cannot be converted to String
+                  userResponse.getId(),
+                                    ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/auth/AuthenticationService.java:65: error: incompatible types: Long cannot be converted to String
+                  userResponse.getId(),
+                                    ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/mailboxes/MailboxService.java:211: error: incompatible types: String cannot be converted to Long
+          return mailboxRepository.findByIdAndActiveTrue(mailboxId)
+                                                         ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/infrastructure/google/label/GmailLabelClient.java:45: error: incompatible types: Long cannot be converted to String
+              return created.getId();
+                                  ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/infrastructure/google/label/GmailLabelClient.java:102: error: incompatible types: Optional<Long> cannot be converted to Optional<String>
+                  .findFirst();
+                            ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/mailboxes/MailboxDto.java:35: error: incompatible types: Long cannot be converted to String
+                  .id(mailBox.getId())
+                                   ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/mailboxes/MailboxDto.java:51: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaigns/CampaignDto.java:53: error: incompatible types: Long cannot be converted to String
+                  .id(campaign.getId())
+                                    ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaigns/CampaignDto.java:78: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaignemails/CampaignEmailDto.java:35: error: incompatible types: Long cannot be converted to String
+                  .id(campaignEmail.getId())
+                                         ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaignemails/CampaignEmailDto.java:50: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaigncontacts/CampaignContactDto.java:35: error: incompatible types: Long cannot be converted to String
+                  .id(campaignContact.getId())
+                                           ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaigncontacts/CampaignContactDto.java:54: error: incompatible types: String cannot be converted to Long
+                  .id(id)
+                      ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/campaigncontacts/CampaignContactInfoDto.java:36: error: incompatible types: Long cannot be converted to String
+                  .id(campaignContact.getId())
+                                           ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/tenants/TenantService.java:112: error: incompatible types: String cannot be converted to Long
+          return tenantRepository.findById(tenantId)
+                                           ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/tenants/TenantService.java:141: error: incompatible types: Long cannot be converted to String
+          zohoCompanySyncService.syncCompanies(tenant.getZohoRefreshToken(), tenant.getId());
+                                                                                         ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/tenants/TenantService.java:142: error: incompatible types: Long cannot be converted to String
+          zohoContactSyncService.syncContacts(tenant.getZohoRefreshToken(), tenant.getId());
+                                                                                        ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/tenants/TenantService.java:176: error: incompatible types: Long cannot be converted to String
+          hubSpotCompanySyncService.syncCompanies(tenant.getHubspotRefreshToken(), tenant.getId());
+                                                                                               ^
+  /Users/ramesh/Workspace/leadplus/leadplus-service/src/main/java/ai/leadplus/application/users/UserSearchService.java:25: warning: [removal] <T>where(Specification<T>) in Specification has been deprecated and marked for removal
+          Specification<User> spec = Specification.where(null);
+                                                  ^
+    where T is a type-variable:
+      T extends Object declared in method <T>where(Specification<T>)
+  Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+  100 errors
+  1 warning
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 5s
+1 actionable task: 1 executed

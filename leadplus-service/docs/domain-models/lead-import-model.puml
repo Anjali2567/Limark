@@ -1,0 +1,109 @@
+ @startuml
+ <style>
+ class {
+   Padding 5
+   RoundCorner 10
+   HorizontalAlignment center
+   LineThickness 0.5
+   FontSize 12
+   LineStyle 2
+ }
+ arrow {
+   LineStyle 2
+   LineThickness 0.75
+ }
+ </style>
+ 
+ skinparam {
+   BackgroundColor Transparent
+   ArrowFontColor DimGray
+   CloudBorderColor DimGray
+   class {
+     BackgroundColor<<Aggregate Root>> #D5A6BD
+     BackgroundColor<<Entity>> #FCE5CD
+     BackgroundColor<<Enum>> #D9D9D9
+   }
+ }
+ 
+ hide circle
+ hide methods
+ 
+ class LeadFileImport <<Aggregate Root>> {
+   id: String
+   importType: ImportType
+   targetEntity: TargetEntity
+   operation: ImportOperation
+   originalFileName: String
+   fileStorageKey: String
+   mappedFieldsJson: String
+   totalRecords: int
+   processedRecords: int
+   insertedRecords: int
+   updatedRecords: int
+   skippedRecords: int
+   failedRecords: int
+   status: ImportStatus
+   uploadedByUserId: String
+   startedAt: LocalDateTime
+   completedAt: LocalDateTime
+   createdAt: LocalDateTime
+   updatedAt: LocalDateTime
+ }
+ 
+ class LeadFileImportRecord <<Entity>> {
+   id: String
+   importId: String
+   recordNumber: int
+   rawPayloadJson: String
+   normalizedPayloadJson: String
+   matchKey: String
+   status: RecordStatus
+   targetEntityId: String
+   errorCode: String
+   errorMessage: String
+   changesJson: String
+   processedAt: LocalDateTime
+   createdAt: LocalDateTime
+ }
+ 
+ enum ImportType <<Enum>> {
+   CONTACT_ENRICHMENT
+   COMPANY_ENRICHMENT
+   CONTACT_CREATE
+   COMPANY_CREATE
+ }
+ 
+ enum TargetEntity <<Enum>> {
+   LEAD_CONTACT
+   LEAD_COMPANY
+ }
+ 
+ enum ImportOperation <<Enum>> {
+   CREATE
+   UPDATE
+   UPSERT
+ }
+ 
+ enum ImportStatus <<Enum>> {
+   PENDING
+   IN_PROGRESS
+   COMPLETED
+   FAILED
+   PARTIAL_SUCCESS
+ }
+ 
+ enum RecordStatus <<Enum>> {
+   INSERTED
+   UPDATED
+   SKIPPED
+   FAILED
+   NO_CHANGE
+ }
+ 
+ LeadFileImport "1" --> "many" LeadFileImportRecord : importId
+ LeadFileImport -down[hidden]- ImportType
+ LeadFileImport -down[hidden]- TargetEntity
+ LeadFileImport -down[hidden]- ImportOperation
+ LeadFileImport -down[hidden]- ImportStatus
+ LeadFileImportRecord -down[hidden]- RecordStatus
+ @enduml

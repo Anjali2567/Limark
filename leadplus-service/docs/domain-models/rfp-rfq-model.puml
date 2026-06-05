@@ -1,0 +1,119 @@
+@startuml
+<style>
+class {
+  Padding 5
+  RoundCorner 10
+  HorizontalAlignment center
+  LineThickness 0.5
+  FontSize 12
+  LineStyle 2
+}
+
+arrow {
+  LineStyle 2
+  LineThickness 0.75
+}
+</style>
+
+skinparam {
+  BackgroundColor Transparent
+  ArrowFontColor DimGray
+  CloudBorderColor DimGray
+  class {
+    BackgroundColor<<Aggregate Root>> #D5A6BD
+    BackgroundColor<<Enum>> #D9D9D9
+    BackgroundColor<<Value Object>> #B6D7A8
+  }
+}
+
+hide circle
+hide methods
+
+class RequestForQuote <<Aggregate Root>> {
+  id: UUID
+  userId: UUID
+  title: string
+  serviceIds: string[]
+  vendorIds: string[]
+  quantity: number
+  budget: BudgetRange
+  deadline: datetime
+  description: string
+  status: RequestForQuoteStatus
+  active: boolean
+  createdAt: datetime
+  createdBy: string
+  updatedAt: datetime
+  updatedBy: string
+}
+
+enum RequestForQuoteStatus <<Enum>> {
+  OPEN
+  CLOSED
+  CANCELLED
+}
+
+class RequestForProposal <<Aggregate Root>> {
+  id: UUID
+  userId: UUID
+  title: string
+  serviceIds: string[]
+  quantity: number
+  budget: BudgetRange
+  timeline: string
+  description: string
+  technologyIds: string[]
+  active: boolean
+  createdAt: datetime
+  createdBy: string
+  updatedAt: datetime
+  updatedBy: string
+}
+
+enum BudgetRange <<Enum>> {
+  BELOW_10K
+  BETWEEN_10K_AND_50K
+  BETWEEN_50K_AND_100K
+  ABOVE_100K
+}
+
+class Quotation <<Aggregate Root>> {
+  id: UUID
+  sourceId: UUID
+  sourceType: SourcingRequestType
+  vendorId: UUID
+  price: number
+  active: boolean
+  createdAt: datetime
+  createdBy: string
+  updatedAt: datetime
+  updatedBy: string
+}
+
+enum SourcingRequestType <<Enum>> {
+  REQUEST_FOR_QUOTE
+  REQUEST_FOR_PROPOSAL
+}
+
+class Collaborator <<Aggregate Root>> {
+  id: UUID
+  sourceId: UUID
+  sourceType: SourcingRequestType
+  userId: UUID
+  role: CollaboratorRole
+  active: boolean
+  createdAt: datetime
+  createdBy: string
+  updatedAt: datetime
+  updatedBy: string
+}
+
+enum CollaboratorRole <<Enum>> {
+  OWNER
+  EDITOR
+  VIEWER
+  BD
+}
+
+
+@enduml

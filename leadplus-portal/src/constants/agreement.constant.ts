@@ -1,0 +1,4 @@
+export enum AgreementType {
+  PRIVACY_POLICY = 'PRIVACY_POLICY',
+  TERMS_OF_SERVICE = 'TERMS_OF_SERVICE',
+}

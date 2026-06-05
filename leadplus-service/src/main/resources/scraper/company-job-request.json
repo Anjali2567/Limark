@@ -1,0 +1,123 @@
+{
+  "options": {
+    "locale": "en-LK",
+    "timeout": 120000,
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+    "timezoneId": "Asia/Colombo"
+  },
+  "actions": [
+    {
+      "type": "loadPage",
+      "timeout": 120000,
+      "waitUntil": "domcontentloaded"
+    },
+    {
+      "type": "dismissCookies"
+    },
+    {
+      "type": "waitForSelector",
+      "timeout": 10000,
+      "selector": "a[href]"
+    },
+    {
+      "type": "llmFindAllLinks",
+      "target": "Careers|Jobs|Open Positions|Join Us|Work With Us|We're Hiring|Join Our Team|Employment|Opportunities|Vacancies",
+      "maxLinks": 3
+    },
+    {
+      "do": [
+        {
+          "ref": "$current",
+          "type": "navigateTo",
+          "waitUntil": "domcontentloaded",
+          "waitAfterClick": 10000
+        },
+        {
+          "type": "scrollToEnd",
+          "maxScrolls": 10,
+          "scrollDelay": 500
+        },
+        {
+          "type": "llmExtract",
+          "schema": {
+            "jobs": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "e.g., Full-time, Part-time, Contract, Remote, Hybrid"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "salary": {
+                    "type": "string"
+                  },
+                  "skills": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "jobUrl": {
+                    "type": "string"
+                  },
+                  "applyUrl": {
+                    "type": "string"
+                  },
+                  "benefits": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  },
+                  "postedDate": {
+                    "type": "date",
+                    "format": "YYYY-MM-DD"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "requirements": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "pageType": {
+              "type": "string",
+              "description": "Type of page: 'job_listing' (multiple jobs), 'job_detail' (single job), or 'careers_landing' (general careers info)"
+            },
+            "companyName": {
+              "type": "string"
+            }
+          },
+          "output_key": "careers",
+          "forceVisible": true,
+          "instructions": "Extract all job listings from this page. Look for job titles, departments, locations, job types (full-time, remote, etc.), descriptions, requirements, and application links. If this is a job listing page with multiple jobs, extract all of them. If this is a single job detail page, extract that job's full details. For jobUrl, capture the link that opens the job's full detail page — must be a full URL to a different page, not a # anchor. For applyUrl, capture the direct application link."
+        },
+        {
+          "type": "goBack",
+          "waitUntil": "domcontentloaded",
+          "waitAfterClick": 5000
+        }
+      ],
+      "type": "forEach"
+    }
+  ]
+}

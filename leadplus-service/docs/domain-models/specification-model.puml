@@ -1,0 +1,59 @@
+@startuml
+<style>
+class {
+  Padding 5
+  RoundCorner 10
+  HorizontalAlignment center
+  LineThickness 0.5
+  FontSize 12
+  LineStyle 2
+}
+
+arrow {
+  LineStyle 2
+  LineThickness 0.75
+}
+</style>
+
+skinparam {
+  BackgroundColor Transparent
+  ArrowFontColor DimGray
+  CloudBorderColor DimGray
+  class {
+    BackgroundColor<<Aggregate Root>> #D5A6BD
+    BackgroundColor<<Enum>> #D9D9D9
+    BackgroundColor<<Value Object>> #B6D7A8
+  }
+}
+
+hide circle
+hide methods
+
+class ApolloSpecification <<Aggregate Root>> {
+  id: UUID
+  personTitleEnabled: boolean
+  personTitles: String[]
+  personSeniorityEnabled: boolean
+  personSeniorities: String[]
+  createdAt: Timestamp
+  createdBy: String
+}
+
+class PromptSpecification <<Aggregate Root>> {
+  id: UUID
+  type: PromptSpecificationType
+  promptTemplate: String
+  createdBy: String
+  createdAt: Timestamp
+}
+
+class PromptSpecificationType <<enum>> {
+  CAMPAIGN_EMAIL_GENERATOR
+  CAMPAIGN_GENERATOR
+  CAMPAIGN_COPILOT
+}
+
+PromptSpecification -right[hidden]- PromptSpecificationType
+ApolloSpecification -down[hidden]- PromptSpecification
+
+@enduml

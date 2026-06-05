@@ -1,0 +1,132 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+env:
+  SERVICE: leadplus
+  NAMESPACE: ${{ github.ref == 'refs/heads/main' && 'production' || 'dev' }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Development' }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Update Application Configuration
+        run: |
+          yq -i '.spring.datasource.url = env(SPRING_DATASOURCE_URL)' -i src/main/resources/application.yml
+          yq -i '.client.url = env(CLIENT_URL)' -i src/main/resources/application.yml
+          yq -i '.spring.ai.openai.api-key = env(OPENAI_APIKEY)' -i src/main/resources/application.yml
+          yq -i '.spring.cloud.aws.credentials.access-key = env(AWS_ACCESS_KEY_ID)' -i src/main/resources/application.yml
+          yq -i '.spring.cloud.aws.credentials.secret-key = env(AWS_SECRET_ACCESS_KEY)' -i src/main/resources/application.yml
+          yq -i '.jwt.secret = env(JWT_SECRET)' -i src/main/resources/application.yml
+          yq -i '.aws.s3.bucket-name = env(S3_BUCKET_NAME)' -i src/main/resources/application.yml
+          yq -i '.aws.cloudfront.url = env(CLOUDFRONT_URL)' -i src/main/resources/application.yml
+          yq -i '.azure.clientId = env(AZURE_CLIENT_ID)' -i src/main/resources/application.yml
+          yq -i '.azure.tenantId = env(AZURE_TENANT_ID)' -i src/main/resources/application.yml
+          yq -i '.azure.clientSecret = env(AZURE_CLIENT_SECRET)' -i src/main/resources/application.yml
+          yq -i '.google.client-id = env(GOOGLE_CLIENT_ID)' -i src/main/resources/application.yml
+          yq -i '.google.client-secret = env(GOOGLE_CLIENT_SECRET)' -i src/main/resources/application.yml
+          yq -i '.google.analytics.credentials.private-key-id = env(GOOGLE_ANALYTICS_PRIVATE_KEY_ID)' -i src/main/resources/application.yml
+          yq -i '.google.analytics.credentials.private-key = env(GOOGLE_ANALYTICS_PRIVATE_KEY)' -i src/main/resources/application.yml
+          yq -i '.google.analytics.credkentials.client-id = env(GOOGLE_ANALYTICS_CLIENT_ID)' -i src/main/resources/application.yml
+          yq -i '.campaign.orchestration.scheduler.enabled = env(CAMPAIGN_ORCHESTRATOR_ENABLED)' -i src/main/resources/application.yml
+          yq -i '.mailbox.scheduler.enabled = env(MAILBOX_RESET_ENABLED)' -i src/main/resources/application.yml
+          yq -i '.authentication.apikey = env(AUTHENTICATION_APIKEY)' -i src/main/resources/application.yml
+          yq -i '.authentication.lead-apiKey = env(AUTHENTICATION_LEAD_APIKEY)' -i src/main/resources/application.yml
+          yq -i '.zoho.client-id = env(ZOHO_CLIENT_ID)' -i src/main/resources/application.yml
+          yq -i '.zoho.client-secret = env(ZOHO_CLIENT_SECRET)' -i src/main/resources/application.yml
+          yq -i '.hubspot.client-id = env(HUBSPOT_CLIENT_ID)' -i src/main/resources/application.yml
+          yq -i '.hubspot.client-secret = env(HUBSPOT_CLIENT_SECRET)' -i src/main/resources/application.yml
+          yq -i '.scraper.base-url = env(SCRAPER_BASE_URL)' -i src/main/resources/application.yml
+          yq -i '.scraper.api-key = env(SCRAPER_API_KEY)' -i src/main/resources/application.yml
+          yq -i '.scraper.scheduler.scheduling.enabled = env(SCRAPER_SCHEDULING_ENABLED)' -i src/main/resources/application.yml
+          yq -i '.scraper.scheduler.polling.enabled = env(SCRAPER_POLLING_ENABLED)' -i src/main/resources/application.yml
+          yq -i '.scraper.scheduler.job-detail.enabled = env(SCRAPER_JOB_DETAIL_ENABLED)' -i src/main/resources/application.yml
+          yq -i '.mail-guard.enabled = env(MAIL_GUARD_ENABLED)' -i src/main/resources/application.yml
+          yq -i '.announcement.orchestration.scheduler.enabled = env(ANNOUNCEMENT_ORCHESTRATOR_ENABLED)' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.USER_APPROVED = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-user-approved"' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.USER_REJECTED = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-user-rejected"' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.VENDOR_APPROVED = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-vendor-approved"' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.VENDOR_REJECTED = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-vendor-rejected"' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.RESET_PASSWORD = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-reset-password"' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.WORKSPACE_INVITATION = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-workspace-invitation"' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.EMAIL_VERIFY = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-email-verify"' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.OTP_VERIFICATION = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-otp-verify"' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.FEEDBACK_RECEIVED = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-feedback-received"' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.COLLABORATOR_INVITE = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-collaborator-invite"' -i src/main/resources/application.yml
+          yq -i '.aws.ses.email-template.COLLABORATOR_ACCESS_CHANGE = strenv(SERVICE) + "-" + strenv(NAMESPACE) + "-collaborator-access-change"' -i src/main/resources/application.yml
+        env:
+          SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+          OPENAI_APIKEY: ${{ secrets.OPENAI_APIKEY }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          S3_BUCKET_NAME: ${{ vars.S3_BUCKET_NAME }}
+          CLOUDFRONT_URL: ${{ vars.CLOUDFRONT_URL }}
+          CLIENT_URL: ${{ vars.CLIENT_URL }}
+          AZURE_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+          AZURE_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          GOOGLE_CLIENT_ID: ${{ vars.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_ANALYTICS_PRIVATE_KEY_ID: ${{ vars.GOOGLE_ANALYTICS_PRIVATE_KEY_ID }}
+          GOOGLE_ANALYTICS_PRIVATE_KEY: ${{ secrets.GOOGLE_ANALYTICS_PRIVATE_KEY }}
+          GOOGLE_ANALYTICS_CLIENT_ID: ${{ vars.GOOGLE_ANALYTICS_CLIENT_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          CAMPAIGN_ORCHESTRATOR_ENABLED: ${{ vars.CAMPAIGN_ORCHESTRATOR_ENABLED }}
+          MAILBOX_RESET_ENABLED: ${{ vars.MAILBOX_RESET_ENABLED }}
+          AUTHENTICATION_APIKEY: ${{ secrets.AUTHENTICATION_APIKEY }}
+          AUTHENTICATION_LEAD_APIKEY: ${{ secrets.AUTHENTICATION_LEAD_APIKEY }}
+          ZOHO_CLIENT_ID: ${{ vars.ZOHO_CLIENT_ID }}
+          ZOHO_CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
+          HUBSPOT_CLIENT_ID: ${{ vars.HUBSPOT_CLIENT_ID }}
+          HUBSPOT_CLIENT_SECRET: ${{ secrets.HUBSPOT_CLIENT_SECRET }}
+          SCRAPER_BASE_URL: ${{ vars.SCRAPER_BASE_URL }}
+          SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
+          SCRAPER_SCHEDULING_ENABLED: ${{ vars.SCRAPER_SCHEDULING_ENABLED }}
+          SCRAPER_POLLING_ENABLED: ${{ vars.SCRAPER_POLLING_ENABLED }}
+          SCRAPER_JOB_DETAIL_ENABLED: ${{ vars.SCRAPER_JOB_DETAIL_ENABLED }}
+          MAIL_GUARD_ENABLED: ${{ vars.MAIL_GUARD_ENABLED }}
+          ANNOUNCEMENT_ORCHESTRATOR_ENABLED: ${{ vars.ANNOUNCEMENT_ORCHESTRATOR_ENABLED }}
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build & Push Docker Image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: latest
+        run: |
+          ./gradlew jib --image="${ECR_REGISTRY}/${SERVICE}-${NAMESPACE}:${IMAGE_TAG}"
+
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --service ${SERVICE}-service-${NAMESPACE} \
+            --force-new-deployment \
+            --deployment-configuration "minimumHealthyPercent=0,maximumPercent=100"

@@ -1,0 +1,535 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  /* Typography variables */
+  --text-8xl: 96px;
+  --text-5xl: 48px;
+  --text-3xl: 30px;
+  --text-2xl: 24px;
+  --text-base: 16px;
+  --text-sm: 14px;
+  /* The default background color for the application. */
+  --background: rgba(255, 255, 255, 1);
+  /* The default color for elements or text that appears on top of the background. */
+  --foreground: rgba(16, 24, 40, 1);
+  /* The background color for cards, modals, and other containers. */
+  --card: rgba(255, 255, 255, 1);
+  /* The default color for text or elements that appear on top of cards, modals and other background containers. */
+  --card-foreground: rgba(16, 24, 40, 1);
+  /* The background color for dropdowns and tooltips. */
+  --popover: rgba(255, 255, 255, 1);
+  /* The default color for text or elements that appear on top of dropdowns and tooltips. */
+  --popover-foreground: rgba(16, 24, 40, 1);
+  /* The primary color used for buttons, links, and other interactive elements. */
+  --primary: rgba(14, 165, 233, 1);
+  /* The default color for text or elements that appear on top of primary colored elements. */
+  --primary-foreground: rgba(255, 255, 255, 1);
+  /* The secondary color used for secondary(but NOT-DESTRUCTIVE) buttons and interactive elements. */
+  --secondary: rgba(243, 244, 246, 1);
+  /* The default color for text or elements that appear on top of secondary colored elements. */
+  --secondary-foreground: rgba(74, 85, 101, 1);
+  /* The muted color used for less prominent elements, such as disabled buttons or disabled text. */
+  --muted: rgba(229, 231, 235, 1);
+  /* The default color for text or elements that appear on top of muted colored elements. */
+  --muted-foreground: rgba(106, 114, 130, 1);
+  /* The accent color used for highlights, links, and other interactive elements. */
+  --accent: rgba(43, 127, 255, 1);
+  /* The default color for text or elements that appear on top of accent colored elements. */
+  --accent-foreground: rgba(255, 255, 255, 1);
+  /* The color used for background in destructive actions, such as delete buttons or error messages. */
+  --destructive: rgba(199, 0, 54, 1);
+  /* The default color for text or elements that appear on top of destructive colored elements. */
+  --destructive-foreground: rgba(255, 255, 255, 1);
+  /* The default border color for elements such as inputs, buttons, and other containers. */
+  --border: rgba(229, 231, 235, 1);
+  /* The default background color for input fields once the text has been filled. Should be either transparent or match the input-background. */
+  --input: rgba(229, 231, 235, 1);
+  /* The default background color for input fields, text areas, and other input elements. */
+  --input-background: rgba(243, 244, 246, 1);
+  /* The default font weight for medium text. */
+  --font-weight-medium: 500;
+  /* The default font weight for normal text. */
+  --font-weight-normal: 400;
+  /* The default font weight for semi-bold text. */
+  --font-weight-semibold: 600;
+  /* The default font weight for bold text. */
+  --font-weight-bold: 700;
+  /* The color for focus rings, outlines, and other focus indicators. */
+  --ring: rgba(14, 165, 233, 1);
+  /* Shadow for small elevations, such as cards or modals. */
+  --elevation-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  /* The color for chart elements, such as a bar or line in a chart. */
+  --chart-1: rgba(14, 165, 233, 1);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-2: rgba(43, 127, 255, 1);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-3: rgba(81, 162, 255, 1);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-4: rgba(142, 197, 255, 1);
+  /* The color for another chart element, such as a bar or line in a chart. */
+  --chart-5: rgba(190, 219, 255, 1);
+  /* The default border radius for elements such as buttons, tooltip, and other containers. */
+  --radius: 6px;
+  /* The border radius for buttons. */
+  --radius-button: 6px;
+  /* The border radius for cards and larger components. */
+  --radius-card: 8px;
+  /* The border radius for avatars. */
+  --radius-avatar: 100px;
+  /* The background color for sidebars, navigation menus, and other persistent elements. */
+  --sidebar: rgba(249, 250, 251, 1);
+  /* The default color for text or elements that appear on top of sidebars, navigation menus, and other persistent elements. */
+  --sidebar-foreground: rgba(74, 85, 101, 1);
+  /* The primary color used for buttons, links, and other interactive elements in sidebars and navigation menus. */
+  --sidebar-primary: rgba(14, 165, 233, 1);
+  /* The default color for text or elements that appear on top of primary colored elements in sidebars and navigation menus. */
+  --sidebar-primary-foreground: rgba(255, 255, 255, 1);
+  /* The accent color used for highlights, links, and other interactive elements in sidebars and navigation menus. */
+  --sidebar-accent: rgba(43, 127, 255, 1);
+  /* The default color for text or elements that appear on top of accent colored elements in sidebars and navigation menus. */
+  --sidebar-accent-foreground: rgba(255, 255, 255, 1);
+  /* The default border color for elements in sidebars and navigation menus. */
+  --sidebar-border: rgba(229, 231, 235, 1);
+  /* The default color for focus rings, outlines, and other focus indicators in sidebars and navigation menus. */
+  --sidebar-ring: rgba(14, 165, 233, 1);
+  /* The color used for successful actions and positive states. */
+  --success: rgba(0, 122, 85, 1);
+  /* The default color for text or elements that appear on top of success colored elements. */
+  --success-foreground: rgba(255, 255, 255, 1);
+  /* The color used for warning actions and caution states. */
+  --warning: rgba(255, 90, 31, 1);
+  /* The default color for text or elements that appear on top of warning colored elements. */
+  --warning-foreground: rgba(255, 255, 255, 1);
+  /* Navy blue color */
+  --navy: rgba(5, 47, 74, 1);
+  /* The default color for text or elements that appear on top of navy colored elements. */
+  --navy-foreground: rgba(255, 255, 255, 1);
+}
+
+/* ========================================================
+   GOLD / NAVY BRAND THEME
+   Applied via .theme-gold on <html> element
+   ======================================================== */
+.theme-gold {
+  --background: rgba(250, 250, 248, 1);
+  --foreground: rgba(10, 15, 30, 1);
+  --card: rgba(255, 255, 255, 1);
+  --card-foreground: rgba(10, 15, 30, 1);
+  --popover: rgba(255, 255, 255, 1);
+  --popover-foreground: rgba(10, 15, 30, 1);
+  --primary: rgba(200, 162, 85, 1);
+  --primary-foreground: rgba(10, 15, 30, 1);
+  --secondary: rgba(243, 244, 246, 1);
+  --secondary-foreground: rgba(74, 80, 98, 1);
+  --muted: rgba(229, 231, 235, 1);
+  --muted-foreground: rgba(136, 145, 164, 1);
+  --accent: rgba(200, 162, 85, 1);
+  --accent-foreground: rgba(10, 15, 30, 1);
+  --destructive: rgba(199, 0, 54, 1);
+  --destructive-foreground: rgba(255, 255, 255, 1);
+  --border: rgba(229, 231, 235, 1);
+  --input: rgba(229, 231, 235, 1);
+  --input-background: rgba(243, 244, 246, 1);
+  --ring: rgba(200, 162, 85, 1);
+  --elevation-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --chart-1: rgba(200, 162, 85, 1);
+  --chart-2: rgba(224, 201, 138, 1);
+  --chart-3: rgba(242, 228, 188, 1);
+  --chart-4: rgba(139, 105, 20, 1);
+  --chart-5: rgba(90, 65, 5, 1);
+  --radius: 6px;
+  --radius-button: 8px;
+  --radius-card: 12px;
+  --radius-avatar: 100px;
+  --sidebar: rgba(10, 15, 30, 1);
+  --sidebar-foreground: rgba(255, 255, 255, 0.8);
+  --sidebar-primary: rgba(200, 162, 85, 1);
+  --sidebar-primary-foreground: rgba(10, 15, 30, 1);
+  --sidebar-accent: rgba(200, 162, 85, 1);
+  --sidebar-accent-foreground: rgba(10, 15, 30, 1);
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-ring: rgba(200, 162, 85, 1);
+  --success: rgba(0, 122, 85, 1);
+  --success-foreground: rgba(255, 255, 255, 1);
+  --warning: rgba(255, 90, 31, 1);
+  --warning-foreground: rgba(255, 255, 255, 1);
+  --navy: rgba(10, 15, 30, 1);
+  --navy-foreground: rgba(255, 255, 255, 1);
+}
+
+/* Landing-page specific theme tokens (resolved per brand theme) */
+:root {
+  --lp-gold: #0ea5e9;
+  --lp-gold-rgb: 14, 165, 233;
+  --lp-dark: #000000;
+  --lp-dark-rgb: 0, 0, 0;
+  --lp-surface: #f8fafc;
+  --lp-hero-bg: #000000;
+}
+
+.theme-gold {
+  --lp-gold: #c8a255;
+  --lp-gold-rgb: 200, 162, 85;
+  --lp-dark: #0a0f1e;
+  --lp-dark-rgb: 10, 15, 30;
+  --lp-surface: #fafaf8;
+  --lp-hero-bg: #0a0f1e;
+}
+
+.dark {
+  --background: rgba(16, 24, 40, 1);
+  --foreground: rgba(255, 255, 255, 1);
+  --card: rgba(31, 41, 55, 1);
+  --card-foreground: rgba(255, 255, 255, 1);
+  --popover: rgba(31, 41, 55, 1);
+  --popover-foreground: rgba(255, 255, 255, 1);
+  --primary: rgba(43, 127, 255, 1);
+  --primary-foreground: rgba(255, 255, 255, 1);
+  --secondary: rgba(55, 65, 81, 1);
+  --secondary-foreground: rgba(229, 231, 235, 1);
+  --muted: rgba(55, 65, 81, 1);
+  --muted-foreground: rgba(156, 163, 175, 1);
+  --accent: rgba(81, 162, 255, 1);
+  --accent-foreground: rgba(255, 255, 255, 1);
+  --destructive: rgba(239, 68, 68, 1);
+  --destructive-foreground: rgba(255, 255, 255, 1);
+  --border: rgba(55, 65, 81, 1);
+  --input: rgba(55, 65, 81, 1);
+  --input-background: rgba(55, 65, 81, 1);
+  --ring: rgba(43, 127, 255, 1);
+  --chart-1: rgba(43, 127, 255, 1);
+  --chart-2: rgba(81, 162, 255, 1);
+  --chart-3: rgba(142, 197, 255, 1);
+  --chart-4: rgba(190, 219, 255, 1);
+  --chart-5: rgba(219, 234, 254, 1);
+  --sidebar: rgba(31, 41, 55, 1);
+  --sidebar-foreground: rgba(229, 231, 235, 1);
+  --sidebar-primary: rgba(43, 127, 255, 1);
+  --sidebar-primary-foreground: rgba(255, 255, 255, 1);
+  --sidebar-accent: rgba(81, 162, 255, 1);
+  --sidebar-accent-foreground: rgba(255, 255, 255, 1);
+  --sidebar-border: rgba(55, 65, 81, 1);
+  --sidebar-ring: rgba(43, 127, 255, 1);
+  --success: rgba(34, 197, 94, 1);
+  --success-foreground: rgba(255, 255, 255, 1);
+  --warning: rgba(251, 146, 60, 1);
+  --warning-foreground: rgba(255, 255, 255, 1);
+  --navy: rgba(5, 47, 74, 1);
+  --navy-foreground: rgba(255, 255, 255, 1);
+}
+
+@theme inline {
+  /* Landing-page brand colour tokens — switch with .theme-gold */
+  --color-lp-gold: var(--lp-gold);
+  --color-lp-dark: var(--lp-dark);
+  --color-lp-surface: var(--lp-surface);
+  --color-lp-hero: var(--lp-hero-bg);
+
+  /* Serif & display font families */
+  --font-family-serif: 'Source Serif 4', Georgia, serif;
+  --font-family-display: 'Outfit', 'Inter', sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius-card);
+  --radius-xl: calc(var(--radius-card) + 4px);
+  --radius-button: var(--radius-button);
+  --radius-avatar: var(--radius-avatar);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
+  }
+}
+
+/**
+ * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
+ */
+@layer base {
+  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+    h1 {
+      font-size: var(--text-8xl);
+      font-weight: var(--font-weight-bold);
+      line-height: 1.2;
+      font-family: "Inter", sans-serif;
+    }
+
+    h2 {
+      font-size: var(--text-5xl);
+      font-weight: var(--font-weight-bold);
+      line-height: 1.3;
+      font-family: "Inter", sans-serif;
+    }
+
+    h3 {
+      font-size: var(--text-3xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.4;
+      font-family: "Inter", sans-serif;
+    }
+
+    h4 {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.4;
+      font-family: "Inter", sans-serif;
+    }
+
+    p {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      font-family: "Inter", sans-serif;
+    }
+
+    label {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.4;
+      font-family: "Inter", sans-serif;
+    }
+
+    button {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      font-family: "Inter", sans-serif;
+    }
+
+    input {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+      font-family: "Inter", sans-serif;
+    }
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+.is-editor-empty::before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+/* Custom Scrollbar for Sidebar */
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Hide scrollbar utility */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Tiptap Editor Styles */
+.ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror li {
+  margin-bottom: 0.25em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LANDING-PAGE ANIMATIONS & UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes lp-fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes lp-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes lp-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes lp-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+@keyframes lp-activity-slide {
+  0%   { opacity: 0; transform: translateY(12px); }
+  10%  { opacity: 1; transform: translateY(0); }
+  90%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-12px); }
+}
+@keyframes lp-bar-grow {
+  from { width: 0; }
+}
+@keyframes lp-spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-lp-fade-up        { animation: lp-fade-up 0.8s ease both; }
+.animate-lp-fade-up-d1     { animation: lp-fade-up 0.8s ease 0.15s both; }
+.animate-lp-fade-up-d2     { animation: lp-fade-up 0.8s ease 0.3s  both; }
+.animate-lp-fade-up-d3     { animation: lp-fade-up 0.8s ease 0.45s both; }
+.animate-lp-fade-up-d4     { animation: lp-fade-up 0.8s ease 0.4s  both; }
+.animate-lp-fade-in        { animation: lp-fade-in 0.8s ease both; }
+.animate-lp-fade-in-fast   { animation: lp-fade-in 0.2s ease both; }
+.animate-lp-blink          { animation: lp-blink 1s infinite; }
+.animate-lp-pulse          { animation: lp-pulse 2s infinite; }
+.animate-lp-activity       { animation: lp-activity-slide 3.5s ease; }
+.animate-lp-spin           { animation: lp-spin 0.8s linear infinite; }
+
+/* Section scroll-reveal */
+.lp-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.lp-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Nav link underline hover */
+.lp-nav-link {
+  position: relative;
+}
+.lp-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 2px;
+  background: var(--lp-gold);
+  transition: width 0.3s ease;
+}
+.lp-nav-link:hover::after { width: 100%; }
+
+/* Search box focus ring */
+.lp-search-box {
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
+}
+.lp-search-box:focus-within {
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.25),
+              0 0 0 2px rgba(var(--lp-gold-rgb), 0.3) !important;
+  transform: translateY(-2px);
+}
+
+/* CTA button shimmer */
+.lp-cta-btn {
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.lp-cta-btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition: left 0.5s ease;
+}
+.lp-cta-btn:hover::after { left: 100%; }
+.lp-cta-btn:hover        { transform: translateY(-1px); }
+
+/* Card hover lifts */
+.lp-vendor-card {
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.lp-vendor-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px -15px rgba(var(--lp-dark-rgb), 0.15);
+}
+.lp-cat-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.lp-cat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px -8px rgba(var(--lp-dark-rgb), 0.12);
+}
+.lp-feature-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.lp-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -12px rgba(var(--lp-dark-rgb), 0.12);
+}
