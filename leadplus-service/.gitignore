@@ -40,3 +40,7 @@ application-local.yml
 ### Migration Logs ###
 migration*.log
 /.gradle_home/
+
+### Build Logs ###
+build-output.log
+*-output.log
