@@ -1,5 +1,0 @@
-export const FEATURES = {
-  LANDING_PAGES_ENABLED: true,
-  CUSTOMER_MODULE_ENABLED: true,
-  AGREEMENT_CHECK_ENABLED: false,
-};
